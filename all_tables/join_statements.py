@@ -1,8 +1,11 @@
+from SQL.sql_object_adapter import SqlObjectAdapter
 from SQL.sql_operations import SQLOperations
 
 
 class JoinFunctions:
-    so = SQLOperations()
+
+    def __init__(self):
+        self.sql_object = SqlObjectAdapter.return_sql()
 
     def print_left_join_table(self):
         """
@@ -17,7 +20,7 @@ class JoinFunctions:
                       " LEFT JOIN teachers USING(teacher_id) " \
                       " LEFT JOIN subjects USING(sub_id) " \
                       " LEFT JOIN departments USING(dp_id) "
-        cursor_obj = self.so.select_query_operation(fetch_query)
+        cursor_obj = self.sql_object.select_query_operation(fetch_query)
         print("------------- Left Join Result ---------------")
         for row in cursor_obj.fetchall():
             print(row)
@@ -36,7 +39,7 @@ class JoinFunctions:
                       " RIGHT JOIN teachers USING(teacher_id) " \
                       " RIGHT JOIN subjects USING(sub_id) " \
                       " RIGHT JOIN departments USING(dp_id) "
-        cursor_obj = self.so.select_query_operation(fetch_query)
+        cursor_obj = self.sql_object.select_query_operation(fetch_query)
         print("------------- Right Join Result ---------------")
         for row in cursor_obj.fetchall():
             print(row)
@@ -55,7 +58,7 @@ class JoinFunctions:
                       " CROSS JOIN teachers USING(teacher_id) " \
                       " CROSS JOIN subjects USING(sub_id) " \
                       " CROSS JOIN departments USING(dp_id) "
-        cursor_obj = self.so.select_query_operation(fetch_query)
+        cursor_obj = self.sql_object.select_query_operation(fetch_query)
         print("------------- Cross Join Result ---------------")
         for row in cursor_obj.fetchall():
             print(row)
@@ -74,7 +77,7 @@ class JoinFunctions:
                       " INNER JOIN teachers USING(teacher_id) " \
                       " INNER JOIN subjects USING(sub_id) " \
                       " INNER JOIN departments USING(dp_id) "
-        cursor_obj = self.so.select_query_operation(fetch_query)
+        cursor_obj = self.sql_object.select_query_operation(fetch_query)
         print("------------- Inner Join Result ---------------")
         for row in cursor_obj.fetchall():
             print(row)

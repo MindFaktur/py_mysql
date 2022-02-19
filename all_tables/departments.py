@@ -1,6 +1,4 @@
-import pymysql
-
-from SQL.sql_operations import SQLOperations
+from SQL.sql_object_adapter import SqlObjectAdapter
 from utilities.table_utilitis import TableUtilities
 import logging
 
@@ -10,7 +8,7 @@ class Departments:
 
     def __init__(self):
         self.utility_object = TableUtilities()
-        self.sql_object = SQLOperations()
+        self.sql_object = SqlObjectAdapter.return_sql()
 
     def add_department(self):
         """

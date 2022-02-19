@@ -3,28 +3,28 @@
 class CreateTables:
 
     create_departments_table = "CREATE TABLE departments (" \
-                               "dp_id INT AUTO_INCREMENT PRIMARY KEY," \
+                               "dp_id SERIAL PRIMARY KEY," \
                                "dp_name VARCHAR(50) UNIQUE " \
                                ")"
 
     create_subjects_table = "CREATE TABLE subjects (" \
-                            "sub_id INT AUTO_INCREMENT PRIMARY KEY," \
+                            "sub_id SERIAL PRIMARY KEY," \
                             "sub_name VARCHAR(50) UNIQUE, " \
                             "dp_id INT," \
                             "FOREIGN KEY (dp_id) REFERENCES departments(dp_id) ON DELETE CASCADE" \
                             ");"
 
     create_teachers_table = "CREATE TABLE teachers (" \
-                            "teacher_id INT AUTO_INCREMENT PRIMARY KEY," \
+                            "teacher_id SERIAL PRIMARY KEY," \
                             "teacher_first_name VARCHAR(50), " \
                             "teacher_last_name VARCHAR(50), " \
-                            "email VARCHAR(50) UNIQUE, " \
+                            "email VARCHAR(50) , " \
                             "sub_id INT," \
                             "FOREIGN KEY (sub_id) REFERENCES subjects(sub_id) ON DELETE CASCADE" \
                             ");"
 
     create_students_table = "CREATE TABLE students (" \
-                            "student_id INT AUTO_INCREMENT PRIMARY KEY," \
+                            "student_id SERIAL PRIMARY KEY," \
                             "student_first_name VARCHAR(50), " \
                             "student_last_name VARCHAR(50), " \
                             "teacher_id INT," \

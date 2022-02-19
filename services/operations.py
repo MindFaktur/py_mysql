@@ -1,5 +1,6 @@
 import pymysql
 
+from SQL.sql_object_adapter import SqlObjectAdapter
 from SQL.sql_operations import SQLOperations
 from all_tables.departments import Departments
 from all_tables.join_statements import JoinFunctions
@@ -16,7 +17,7 @@ class Operations:
         :return: nothing
         """
         option = self.main_menu()
-        exit_at = 26
+        exit_at = 19
         while option != exit_at:
             self.menu_operations(option)
             option = self.main_menu()
@@ -69,7 +70,7 @@ class Operations:
         teach = Teachers()
         stud = Students()
 
-        so = SQLOperations()
+        sql_obj = SqlObjectAdapter.return_sql()
 
         choices = ("subject", "dp_id", "teacher_first_name", "teacher_last_name", "sub_id",
                    "student_first_name", "student_last_name", "teacher_name")
@@ -80,6 +81,7 @@ class Operations:
         if user_choice == 9:
             return
         functions_dict.get(user_choice)(choices[user_choice - 1])
+        sql_obj.close_sql()
 
     def menu_operations(self, choice):
         """
@@ -93,7 +95,7 @@ class Operations:
         stud = Students()
         joins = JoinFunctions()
 
-        so = SQLOperations()
+        sql_obj = SqlObjectAdapter.return_sql()
 
         functions_dict = {1: dp.add_department, 2: dp.delete_department, 3: dp.print_departments_table,
                           4: sub.add_subject, 5: sub.delete_subject, 6: sub.print_subjects_table,
@@ -105,5 +107,6 @@ class Operations:
                           }
 
         functions_dict.get(choice)()
-        so.close_sql()
+        sql_obj.close_sql()
+
 
